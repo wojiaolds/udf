@@ -6,7 +6,6 @@
  */
 package org.itkk.udf.core.xss;
 
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.util.HtmlUtils;
 
 import javax.servlet.http.HttpServletRequest;
@@ -31,19 +30,13 @@ public class XssHttpServletRequestWrapper extends HttpServletRequestWrapper {
     @Override
     public String getHeader(String name) {
         String value = super.getHeader(name);
-        if (StringUtils.isNotBlank(value)) {
-            return HtmlUtils.htmlEscape(value);
-        }
-        return null;
+        return HtmlUtils.htmlEscape(value);
     }
 
     @Override
     public String getParameter(String name) {
         String value = super.getParameter(name);
-        if (StringUtils.isNotBlank(value)) {
-            return HtmlUtils.htmlEscape(value);
-        }
-        return null;
+        return HtmlUtils.htmlEscape(value);
     }
 
     @Override
@@ -53,11 +46,7 @@ public class XssHttpServletRequestWrapper extends HttpServletRequestWrapper {
             int length = values.length;
             String[] escapseValues = new String[length];
             for (int i = 0; i < length; i++) {
-                if (StringUtils.isNotBlank(values[i])) {
-                    escapseValues[i] = HtmlUtils.htmlEscape(values[i]);
-                } else {
-                    escapseValues[i] = null;
-                }
+                escapseValues[i] = HtmlUtils.htmlEscape(values[i]);
             }
             return escapseValues;
         }

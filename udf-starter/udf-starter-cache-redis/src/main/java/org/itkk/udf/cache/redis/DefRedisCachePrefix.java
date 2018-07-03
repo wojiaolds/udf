@@ -1,12 +1,13 @@
 package org.itkk.udf.cache.redis;
 
+import org.springframework.data.redis.cache.RedisCachePrefix;
 import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 
 /**
  * DefRedisCachePrefix
  */
-public class DefRedisCachePrefix {
+public class DefRedisCachePrefix implements RedisCachePrefix {
     /**
      * serializer
      */
@@ -27,7 +28,7 @@ public class DefRedisCachePrefix {
     }
 
 
-    //@Override
+    @Override
     public byte[] prefix(String cacheName) {
         return serializer.serialize(prefix.concat(":"));
     }
